@@ -10,7 +10,12 @@ public class UserController {
 
 	@GetMapping("/sign-up-view")
 	public String signUpView() {
-		return "layout/defaultLayout";
+		return "user/signUp";
+	}
+	
+	@GetMapping("/sign-in-view")
+	public String signInView() {
+		return "user/signIn";
 	}
 
 }
