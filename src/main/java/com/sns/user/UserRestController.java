@@ -13,6 +13,8 @@ import com.sns.common.EncryptUtils;
 import com.sns.user.bo.UserBO;
 import com.sns.user.entity.UserEntity;
 
+import jakarta.servlet.http.HttpSession;
+
 
 
 @RequestMapping("/user")
@@ -75,6 +77,33 @@ public class UserRestController {
 		
 	}
 	
-	
+	@PostMapping("/sign-in")
+	public Map<String, Object> signIn(
+			@RequestParam("loginId")String loginId,
+			@RequestParam("password")String password,
+			HttpSession session) {
+		
+		// Hashing Password
+		String hashedPassword = EncryptUtils.md5(password);
+
+		// Check user (UserEntity or null)
+		
+		UserEntity user = userBO.getUserEntityByLoginIdPassword(loginId, hashedPassword);
+		
+		// session & result
+		Map<String, Object> result = new HashMap<>();
+		if (user != null) {
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userLoginId", user.getLoginId());
+			session.setAttribute("userName", user.getName());
+			result.put("code", 200);
+			result.put("result", "성공");
+		} else {
+			result.put("code", 403);
+			result.put("error_message", "존재하지 않는 사용자입니다.");
+		}
+		
+		return result;
+	}
 	
 }

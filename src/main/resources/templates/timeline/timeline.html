@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/defaultLayout}">
+<section layout:fragment="content" class="contents d-flex justify-content-center">
+<!-- timeline -->
+<div>
+	<!-- 글쓰기 영역 -->
+	<div class="border mb-3">
+		<textarea rows="3" cols="100" class="border-0" placeholder="내용을 입력해주세요."></textarea>
+		<div class="d-flex justify-content-between">
+			<img src="#">
+			<button type="submit" class="btn btn-info">계시</button>
+		</div>
+	</div>
+	
+	<!-- 글 영역 -->
+	<div class="card">
+		<!-- 윗 영역 -->
+		<div class="d-flex align-items-center justify-content-between">
+			<span class="font-weight-bold">marobiana</span>
+			<img alt="" src="/img/more-icon.png" width="40" height="40" >
+		</div>
+
+		<!-- 이미지 -->		
+		<div class="card-image">
+			<img src="https://cdn.pixabay.com/photo/2023/10/18/15/30/statue-8324499_1280.jpg">
+		</div>
+		<div class="card-body">
+			<!-- 좋아요 -->
+			<div>
+				<img src="/img/heart-icon-empty.png">
+				span
+			</div>
+		
+			<!-- 글 내용 -->
+			<div>
+			
+			</div>
+			
+			<!-- 댓글 -->
+			
+		</div>
+		
+	</div>
+</div>	
+</section>
+
+<th:block layout:fragment="script">
+    <script>
+
+    </script>
+</th:block>
+</html>
