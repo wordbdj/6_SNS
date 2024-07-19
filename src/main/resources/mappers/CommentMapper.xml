@@ -8,4 +8,24 @@
  		FROM
  			`comment`
  	</select>
+ 	
+ 	<insert id="insertComment" parameterType="map">
+ 		INSERT INTO `comment`
+ 		(
+ 			`userId`
+			,`postId`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+			, #{postId}
+			, #{content}
+			, NOW()
+			, NOW()
+ 		)
+ 		
+ 	</insert>
  </mapper>
