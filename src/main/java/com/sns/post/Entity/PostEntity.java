@@ -45,4 +45,6 @@ public class PostEntity {
 	@UpdateTimestamp
 	@Column(name = "updatedAt")
 	private LocalDateTime updatedAt;
+
+
 }

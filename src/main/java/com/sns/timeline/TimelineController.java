@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.sns.comment.bo.CommentBO;
+import com.sns.comment.domain.Comment;
 import com.sns.post.Entity.PostEntity;
 import com.sns.post.bo.PostBO;
 
@@ -19,15 +21,23 @@ public class TimelineController {
 	@Autowired
 	private PostBO postBO;
 	
-	@GetMapping("/timeline/timeline-view")
-	public String timelineView(Model model) {
-		
+	@Autowired
+	private CommentBO commentBO;
 	
+	@GetMapping("/timeline/timeline-view")
+	public String timelineView(Model model,
+			HttpSession session) {
+		
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		
 		// DB Check - list<PostEntity>
 		List<PostEntity> postList = postBO.getPostEntityList();
+		List<Comment> commentList = commentBO.getCommentListByUserId(userId);
 		
 		// model
 		model.addAttribute("postList", postList);
+		model.addAttribute("commentList", commentList);
 		
 		return "timeline/timeline";
 	}
