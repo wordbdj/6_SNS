@@ -19,9 +19,10 @@ public class CommentBO {
 		commentMapper.insertComment(postId, userId, content);
 	}
 	
-	public List<Comment> getCommentListByUserId(int userId) {
+	public List<Comment> getCommentList() {
 		
-		return commentMapper.selectCommentListByUserId(userId);
+		return commentMapper.selectCommentList();
+		
 		
 	}
 }

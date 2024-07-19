@@ -25,15 +25,14 @@ public class TimelineController {
 	private CommentBO commentBO;
 	
 	@GetMapping("/timeline/timeline-view")
-	public String timelineView(Model model,
-			HttpSession session) {
+	public String timelineView(Model model
+			) {
 		
-		Integer userId = (Integer) session.getAttribute("userId");
-		
-		
+
 		// DB Check - list<PostEntity>
 		List<PostEntity> postList = postBO.getPostEntityList();
-		List<Comment> commentList = commentBO.getCommentListByUserId(userId);
+		List<Comment> commentList = commentBO.getCommentList();
+		
 		
 		// model
 		model.addAttribute("postList", postList);

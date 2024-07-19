@@ -29,7 +29,7 @@
  		
  	</insert>
  	
- 	<select id="selectCommentListByUserId" parameterType="int" resultType="com.sns.comment.domain.Comment">
+ 	<select id="selectCommentList" resultType="com.sns.comment.domain.Comment">
  		SELECT
  			`id`
  			,`userId`
@@ -39,8 +39,7 @@
 			,`updatedAt`
  		FROM
  			`comment`
- 		WHERE
- 			`userId` = #{userId}			
+			
  	</select>
  	
  </mapper>
