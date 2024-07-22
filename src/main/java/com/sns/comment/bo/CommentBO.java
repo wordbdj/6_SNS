@@ -37,6 +37,11 @@ public class CommentBO {
 		return commentMapper.selectCommentList();
 	}
 	
+	public void deleteCommentById(int id) {
+		
+		commentMapper.deleteCommentById(id);
+	}
+	
 	
 	
 	// input: 글번호		output:List<CommentView>
