@@ -42,4 +42,19 @@
 			
  	</select>
  	
+ 		<select id="selectCommentListbyPostId" parameterType="int" resultType="com.sns.comment.domain.Comment">
+ 		SELECT
+ 			`id`
+ 			,`userId`
+			,`postId`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+ 		FROM
+ 			`comment`
+ 		WHERE
+ 			`postId` = #{postId}
+			
+ 	</select>
+ 	
  </mapper>
