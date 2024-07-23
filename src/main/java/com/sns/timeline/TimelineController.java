@@ -14,6 +14,8 @@ import com.sns.post.bo.PostBO;
 import com.sns.timeline.bo.TimelineBO;
 import com.sns.timeline.domain.CardView;
 
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class TimelineController {
@@ -28,19 +30,21 @@ public class TimelineController {
 	private TimelineBO timelineBO;
 	
 	@GetMapping("/timeline/timeline-view")
-	public String timelineView(Model model
-			) {
+	public String timelineView(Model model,
+			HttpSession session) {
+		
+		Integer userId = (Integer)session.getAttribute("userId");
 		
 
 		// DB Check - list<PostEntity>
-		List<PostEntity> postList = postBO.getPostEntityList();
-		List<Comment> commentList = commentBO.getCommentList();
-		List<CardView> cardViewList = timelineBO.generateCardViewList();
+//		List<PostEntity> postList = postBO.getPostEntityList();
+//		List<Comment> commentList = commentBO.getCommentList();
+		List<CardView> cardViewList = timelineBO.generateCardViewList(userId);
 		
 		
 		// model
-		model.addAttribute("postList", postList);
-		model.addAttribute("commentList", commentList);
+//		model.addAttribute("postList", postList);
+//		model.addAttribute("commentList", commentList);
 		
 		model.addAttribute("cardViewList", cardViewList);
 		

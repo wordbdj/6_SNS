@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.sns.comment.bo.CommentBO;
 import com.sns.comment.domain.CommentView;
+import com.sns.like.bo.LikeBO;
 import com.sns.post.Entity.PostEntity;
 import com.sns.post.bo.PostBO;
 import com.sns.timeline.domain.CardView;
@@ -26,8 +27,11 @@ public class TimelineBO {
 	@Autowired
 	private CommentBO commentBO;
 	
+	@Autowired
+	private LikeBO likeBO;
+	
 	// input : 		output: List<CardView>
-	public List<CardView> generateCardViewList() {
+	public List<CardView> generateCardViewList(Integer userId) {
 		List<CardView> cardViewList = new ArrayList<>();
 		
 		// 글목록을 가져온다. List<PostEntity>
@@ -48,6 +52,13 @@ public class TimelineBO {
 			// TODO 댓글을 카드에 넣는다.
 			card.setCommentList(commentViewList);
 			
+			// 좋아요 개수
+			int likeCount = likeBO.likeCount(card.getPost().getId());
+			card.setLikeCount(likeCount);
+			
+			// 좋아요 여부 
+			boolean filledLike = likeBO.filledLike(userId, card.getPost().getId());
+			card.setFilledLike(filledLike);
 			
 			cardViewList.add(card);
 		}
