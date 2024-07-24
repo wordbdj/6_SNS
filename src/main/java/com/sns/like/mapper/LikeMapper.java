@@ -10,19 +10,24 @@ import com.sns.like.domain.Like;
 @Mapper
 public interface LikeMapper {
 
-	public Like selectLikeByUserIdPostId(
-			@Param("userId")int userId,
-			@Param("postId")int postId);
+//	public int selectLikeByUserIdPostId(
+//			@Param("userId") int userId,
+//			@Param("postId") int postId);
 	
-	public List<Like> selectLikeByPostId(
-			@Param("postId")int postId);
+//	public int selectLikeCountByPostId(
+//			int postId);
+	
+	// 카운트 쿼리를 하나로 합친다.
+	public int selectLikeCountByPostIdOrUserId(
+			@Param("postId") int postId,
+			@Param("userId") Integer userId);
 	
 	public void insertLike(
-			@Param("userId")int userId,
-			@Param("postId")int postId);
+			@Param("userId") int userId,
+			@Param("postId") int postId);
 	
 	public void deleteLike(
-			@Param("userId")int userId,
-			@Param("postId")int postId);
+			@Param("userId") int userId,
+			@Param("postId") int postId);
 	
 }

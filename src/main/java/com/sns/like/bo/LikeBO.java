@@ -19,10 +19,10 @@ public class LikeBO {
 		
 		// 조회
 		
-		Like like = likeMapper.selectLikeByUserIdPostId(userId, postId);
+		int like = likeMapper.selectLikeCountByPostIdOrUserId( postId, userId);
 		
 		// 여부 => 삭제 or 추가
-		if (like != null) {
+		if (like > 0) {
 			likeMapper.deleteLike(userId, postId);
 		} else {
 			likeMapper.insertLike(userId, postId);
@@ -30,24 +30,21 @@ public class LikeBO {
 		
 	}
 	
-	public int likeCount(int postId) {
+	public int getlikeCountByPostId(int postId) {
 		
-		List<Like> like = likeMapper.selectLikeByPostId(postId);
-		int count = like.size();
-		
-		return count;
+		return likeMapper.selectLikeCountByPostIdOrUserId(postId , null);
 		
 	}
 	
-	public boolean filledLike(int userId, int postId) {
+	public boolean filledLikeByPostIdUserId(Integer userId, int postId) {
 		
-		Like like = likeMapper.selectLikeByUserIdPostId(userId, postId);
-		
-		if (like != null) {
-			return true;
-		} else {
+		if (userId == null) {
 			return false;
 		}
+		
+		// 로그인이면 : 1. 행이 있으면(1) true 		2. 없으면(0) false
+		return likeMapper.selectLikeCountByPostIdOrUserId(postId, userId) == 1 ? true : false;
+		
 		
 	}
 	

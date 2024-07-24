@@ -3,12 +3,24 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 	 <mapper namespace="com.sns.like.mapper.LikeMapper">
+	 	<!-- 아래 count 쿼리 두개를 하나로 합친다. -->
+	 	<select id="selectLikeCountByPostIdOrUserId" parameterType="map" resultType="int">
+			SELECT
+	 			COUNT(1)
+	 		FROM
+	 			`like`
+	 		WHERE
+	 			`postId` = #{postId}
+	 			<if test="userId != null">
+	 				AND `userId` = #{userId}
+	 			</if>
+				 	
+	 	</select>
 	 
-	 	<select id="selectLikeByUserIdPostId" parameterType="map" resultType="com.sns.like.domain.Like">
+	 
+	 	<select id="selectLikeByUserIdPostId" parameterType="map" resultType="int">
 	 		SELECT
-	 			`postId`
-	 			,`userId`
-	 			,`createdAt`
+	 			COUNT(1)
 	 		FROM
 	 			`like`
 	 		WHERE
@@ -17,11 +29,9 @@
 	 			`postId` = #{postId}
 	 	</select>
 	 	
-	 	<select id="selectLikeByPostId" parameterType="int" resultType="com.sns.like.domain.Like">
+	 	<select id="selectLikeCountByPostId" parameterType="int" resultType="int">
 	 		SELECT
-	 			`postId`
-	 			,`userId`
-	 			,`createdAt`
+	 			COUNT(*)
 	 		FROM
 	 			`like`
 	 		WHERE
