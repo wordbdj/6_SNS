@@ -1,13 +1,13 @@
 package com.sns.like.bo;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sns.like.domain.Like;
 import com.sns.like.mapper.LikeMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class LikeBO {
 
@@ -45,7 +45,11 @@ public class LikeBO {
 		// 로그인이면 : 1. 행이 있으면(1) true 		2. 없으면(0) false
 		return likeMapper.selectLikeCountByPostIdOrUserId(postId, userId) == 1 ? true : false;
 		
+	}
+	
+	public void deleteLikeByPostId(int postId) {
 		
+		likeMapper.deleteLikeByPostId(postId);
 	}
 	
 }
